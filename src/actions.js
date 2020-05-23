@@ -50,3 +50,17 @@ const createUser = (username, password) => {
 }
 
 
+const login = (username, password) => {
+return(dispatch) => {
+    dispatch({type: LOGIN_START})
+    return axios.post('', {username, password})
+     .then((res) => {
+         localStorage.setItem('token', res.data.token)
+     })
+     .catch((err) => {
+         const payload = err.response ? err.response.data : err
+         dispatch({ type: LOGIN_FAILED, payload})
+     })
+}
+}
+
