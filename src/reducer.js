@@ -81,6 +81,29 @@ const reducer = (state = initialState, action) => {
                     error: action.payload.error
                 }
             }
+            case GET_ACCOUNT_START: {
+                return{
+                    ...state,
+                    isLoading: true,
+                }
+            }
+            case GET_ACCOUNT_SUCCESS: {
+                console.log(action.payload)
+                return{
+                    ...state,
+                    isLoading: false,
+                    error:null,
+                    userData: action.payload
+                }
+            }
+            case GET_ACCOUNT_FAILED: {
+                console.log(action.payload)
+                return{
+                    ...state,
+                    isLoading: false,
+                    error: action.payload.error
+                }
+            }
     }
 }
         
