@@ -104,6 +104,29 @@ const reducer = (state = initialState, action) => {
                     error: action.payload.error
                 }
             }
+            case ADD_PLANT_START: {
+                return {
+                    ...state,
+                    isLoading: true,
+                }
+            }
+            case ADD_PLANT_SUCCESS: {
+                console.log(action.payload)
+                return{
+                    ...state,
+                    isLoading: false,
+                    error: null,
+                    plantChange: action.payload
+                }
+            }
+            case ADD_PLANT_FAILED: {
+                console.log(action.payload)
+                return {
+                    ...state,
+                    isLoading: false,
+                    error: action.payload.error
+                }
+            }
     }
 }
         
