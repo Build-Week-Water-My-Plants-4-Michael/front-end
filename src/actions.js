@@ -1,39 +1,39 @@
-import { axiosWithAuth } from "./axiosWithAuth/axiosWithAuth"
+import axios from 'axios'
 
-const CREATE_USER_START = 'CREATE_USER_START'
-const CREATE_USER_SUCCESS = 'CREATE_USER_SUCCESS'
-const CREATE_USER_FAILED = 'CREATE_USER_FAILED'
+export const CREATE_USER_START = 'CREATE_USER_START'
+export const CREATE_USER_SUCCESS = 'CREATE_USER_SUCCESS'
+export const CREATE_USER_FAILED = 'CREATE_USER_FAILED'
 
-const LOGIN_START = 'LOGIN_START'
-const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
-const LOGIN_FAILED = 'LOGIN_FAILED'
+export const LOGIN_START = 'LOGIN_START'
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
+export const LOGIN_FAILED = 'LOGIN_FAILED'
 
-const GET_ACCOUNT_START = 'GET_DATA_START'
-const GET_ACCOUNT_SUCCESS = 'GET_DATA_SUCCESS'
-const GET_ACCOUNT_FAILED = 'GET_DATA_FAILED'
+export const GET_ACCOUNT_START = 'GET_DATA_START'
+export const GET_ACCOUNT_SUCCESS = 'GET_DATA_SUCCESS'
+export const GET_ACCOUNT_FAILED = 'GET_DATA_FAILED'
 
-const ADD_PLANT_START = 'ADD_PLANT_START'
-const ADD_PLANT_SUCCESS = 'ADD_PLANT_SUCCESS'
-const ADD_PLANT_FAILED = 'ADD_PLANT_FAILED'
+export const ADD_PLANT_START = 'ADD_PLANT_START'
+export const ADD_PLANT_SUCCESS = 'ADD_PLANT_SUCCESS'
+export const ADD_PLANT_FAILED = 'ADD_PLANT_FAILED'
 
-const GET_PLANT_START = 'GET_PLANT_START'
-const GET_PLANT_SUCCESS = 'GET_PLANT_SUCCESS'
-const GET_PLANT_FAILED = 'GET_PLANT_FAILED'
+export const GET_PLANT_START = 'GET_PLANT_START'
+export const GET_PLANT_SUCCESS = 'GET_PLANT_SUCCESS'
+export const GET_PLANT_FAILED = 'GET_PLANT_FAILED'
 
-const UPDATE_PLANT_START = 'UPDATE_PLANT_START'
-const UPDATE_PLANT_SUCCESS = 'UPDATE_PLANT_SUCCESS'
-const UPDATE_PLANT_FAILED = 'UPDATE_PLANT_FAILED'
+export const UPDATE_PLANT_START = 'UPDATE_PLANT_START'
+export const UPDATE_PLANT_SUCCESS = 'UPDATE_PLANT_SUCCESS'
+export const UPDATE_PLANT_FAILED = 'UPDATE_PLANT_FAILED'
+ 
+export const DELETE_PLANT_START = 'DELETE_PLANT_START'
+export const DELETE_PLANT_SUCCESS = 'DELETE_PLANT_SUCCESS'
+export const DELETE_PLANT_FAILED = 'DELETE_PLANT_FAILED'
 
-const DELETE_PLANT_START = 'DELETE_PLANT_START'
-const DELETE_PLANT_SUCCESS = 'DELETE_PLANT_SUCCESS'
-const DELETE_PLANT_FAILED = 'DELETE_PLANT_FAILED'
-
-const PLANT_ID ='PLANT_ID'
-
-
+export const PLANT_ID ='PLANT_ID'
 
 
-const createUser = (username, password) => {
+
+
+export const createUser = (username, password) => {
     return(dispatch) => {
         dispatch({type: CREATE_USER_START})
 
@@ -50,7 +50,7 @@ const createUser = (username, password) => {
 }
 
 
-const login = (username, password) => {
+export const login = (username, password) => {
 return(dispatch) => {
     dispatch({type: LOGIN_START})
     return axios.post('', {username, password}) //insert end point for creating a new user account
@@ -64,7 +64,7 @@ return(dispatch) => {
 }
 }
 
-const getAccount = () => {
+export const getAccount = () => {
     return(dispatch) => {
         dispatch({type: GET_ACCOUNT_START})
 
@@ -83,7 +83,7 @@ const getAccount = () => {
     }
 }
 
-const addPlant = (payload) => {
+export const addPlant = (payload) => {
 return(dispatch) => {
     dispatch({type: ADD_PLANT_START})
 
@@ -104,7 +104,7 @@ return(dispatch) => {
 }
 
 
-const getPlant = (id) => {
+export const getPlant = (id) => {
     return (dispatch) => {
         dispatch ({ type: GET_PLANT_START })
 
@@ -124,7 +124,7 @@ const getPlant = (id) => {
 }
 
 
-const updatePLant = (payload, id) => {
+export const updatePLant = (payload, id) => {
     return(dispatch) => {
         dispatch({ type: UPDATE_PLANT_START })
 
@@ -144,7 +144,7 @@ const updatePLant = (payload, id) => {
 
 
 
-const deletePlant = (id) => {
+export const deletePlant = (id) => {
     return(dispatch) => {
         dispatch({ type: DELETE_PLANT_START })
 
@@ -164,7 +164,7 @@ const deletePlant = (id) => {
 }
 
 
-const plantID = () => {
+export const plantID = () => {
     return{
         type: PLANT_ID,
         payload: id
@@ -172,4 +172,3 @@ const plantID = () => {
 }
 
 
-export default actions
