@@ -83,7 +83,26 @@ const getAccount = () => {
     }
 }
 
-const addPlant = () => {
-    
+const addPlant = (payload) => {
+return(dispatch) => {
+    dispatch({type: ADD_PLANT_START})
+
+    const headers = {
+        Authorization: localStorage.getItem('token'),
+    }
+    console.log(payload)
+
+    axios.post('', payload, {headers}) //insert URL
+    .then((res) => {
+        dispatch ({type: ADD_PLANT_SUCCESS, payload: res.data})
+    })
+    .catch((err) => {
+        console.log(err)
+        dispatch({type: ADD_PLANT_FAILED, payload: err})
+    })
 }
+}
+
+
+
 
