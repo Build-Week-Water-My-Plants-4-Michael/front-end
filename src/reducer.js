@@ -36,6 +36,13 @@ const reducer = (state = initialState, action) => {
         default:
             return state;
 
+            case CREATE_USER_START:{
+                return{
+                    ...state,
+                    isLoading: true,
+                }
+            }
+
             case CREATE_USER_SUCCES:{
                 console.log(action.payload)
                 return{
@@ -52,8 +59,28 @@ const reducer = (state = initialState, action) => {
                     error:action.payload.error
                 }
             }
-            
-
+            case LOGIN_START: {
+                return {
+                    ...state,
+                    isLoading: true,
+                }
+            }
+            case LOGIN_SUCCESS: {
+                console.log(action.payload)
+                return{
+                    ...state,
+                    isLoading: false,
+                    error: null,
+                }
+            }
+            case LOGIN_FAILED: {
+                console.log(action.payload)
+                return{
+                    ...state,
+                    isLoading: false,
+                    error: action.payload.error
+                }
+            }
     }
 }
         
