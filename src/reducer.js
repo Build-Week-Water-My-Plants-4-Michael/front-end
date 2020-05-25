@@ -173,6 +173,15 @@ const reducer = (state = initialState, action) => {
                     error: action.payload.error
                 }
             }
+            case PLANT_ID: {
+                console.log(action.payload)
+                return{
+                    ...state,
+                    plantID: action.payload
+                }
+            }
+            default:
+                return state
     }
 }
         
