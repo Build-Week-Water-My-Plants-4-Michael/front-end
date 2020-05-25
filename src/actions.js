@@ -53,7 +53,7 @@ const createUser = (username, password) => {
 const login = (username, password) => {
 return(dispatch) => {
     dispatch({type: LOGIN_START})
-    return axios.post('', {username, password})
+    return axios.post('', {username, password}) //insert end point for creating a new user account
      .then((res) => {
          localStorage.setItem('token', res.data.token)
      })
@@ -62,5 +62,28 @@ return(dispatch) => {
          dispatch({ type: LOGIN_FAILED, payload})
      })
 }
+}
+
+const getAccount = () => {
+    return(dispatch) => {
+        dispatch({type: GET_ACCOUNT_START})
+
+        const headers = {
+            Authorization: localStorage.getITem('token'),
+        }
+
+        axios.get('', {headers}) //insert URL
+        .then((res) => {
+            dispatch ({type: GET_ACCOUNT_SUCCESS, payload: res.data})
+        })
+        .catch((err) => {
+            console.log(err)
+            dispatch({type: GET_ACCOUNT_FAILED, payload: err.response.data})
+        })
+    }
+}
+
+const addPlant = () => {
+    
 }
 
