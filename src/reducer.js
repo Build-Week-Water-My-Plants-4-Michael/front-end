@@ -20,13 +20,44 @@ import{
     PLANT_ID,
 } from './actions'
 
+
+const initialState = {
+    isLoading: false,
+    error: null,
+    userData: [],
+    userPlant: {},
+    plantChange: ''
+}
+
+
 const reducer = (state = initialState, action) => {
     switch(action.type){
 
         default:
             return state;
+
+            case CREATE_USER_SUCCES:{
+                console.log(action.payload)
+                return{
+                    ...state,
+                    isLoading: false,
+                    error:null,
+                }
+            }
+            case CREATE_USER_FAILED: {
+                console.log(action.payload)
+                return{
+                    ...state,
+                    isLoading: false,
+                    error:action.payload.error
+                }
+            }
+            
+
     }
 }
+        
+
 
 
 
