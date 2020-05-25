@@ -123,3 +123,21 @@ const getPlant = () => {
     }
 }
 
+
+const updatePLant = () => {
+    return(dispatch) => {
+        dispatch({ type: UPDATE_PLANT_START })
+
+        const headers = {
+            Authorization: localStorage.getItem('token'),
+        }
+        console.log(payload)
+        axios.put('', payload, { headers }) //inset URL
+        .then((res) => {
+            dispatch({ type: UPDATE_PLANT_SUCCESS, payload: res.data })
+        })
+        .catch((err) => {
+            dispatch({ type: UPDATE_PLANT_FAILED })
+        })
+    }
+}
