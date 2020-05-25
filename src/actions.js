@@ -104,5 +104,22 @@ return(dispatch) => {
 }
 
 
+const getPlant = () => {
+    return (dispatch) => {
+        dispatch ({ type: GET_PLANT_START })
 
+        const headers = {
+            Authorzation: localStorage.getItem('token'),
+        }
+        
+        axios.get('', {headers}) //insert URL
+        .then((res) => {
+            dispatch({ type: GET_PLANT_SUCCESS, payload: res.data })
+        })
+        .catch((err) => {
+            console.log(err)
+            dispatch({ rtpe: GET_PLANT_FAILED, payload: err.response.data })
+        })
+    }
+}
 
