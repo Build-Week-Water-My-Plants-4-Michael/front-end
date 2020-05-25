@@ -150,6 +150,29 @@ const reducer = (state = initialState, action) => {
                     error: action.payload.error
                 }
             }
+            case GET_PLANT_START: {
+                return {
+                    ...state,
+                    isLoading: true,
+                }
+            }
+            case GET_PLANT_SUCCESS: {
+                console.log(action.payload)
+                return{
+                    ...state,
+                    isLoading: false,
+                    error: null,
+                    userPlant: action.payload
+                }
+            }
+            case GET_PLANT_FAILED: {
+                console.log(aciton.payload)
+                return{
+                    ...state,
+                    isLoading: false,
+                    error: action.payload.error
+                }
+            }
     }
 }
         
