@@ -104,7 +104,7 @@ return(dispatch) => {
 }
 
 
-const getPlant = () => {
+const getPlant = (id) => {
     return (dispatch) => {
         dispatch ({ type: GET_PLANT_START })
 
@@ -124,7 +124,7 @@ const getPlant = () => {
 }
 
 
-const updatePLant = () => {
+const updatePLant = (payload, id) => {
     return(dispatch) => {
         dispatch({ type: UPDATE_PLANT_START })
 
@@ -139,5 +139,34 @@ const updatePLant = () => {
         .catch((err) => {
             dispatch({ type: UPDATE_PLANT_FAILED })
         })
+    }
+}
+
+
+
+const deletePlant = (id) => {
+    return(dispatch) => {
+        dispatch({ type: DELETE_PLANT_START })
+
+        const headers = {
+            Authorization : localStorage.getItem('token'),
+        }
+
+        axios.delete('', { headers }) //insert URL
+        .then((res) => {
+            console.log(res)
+            dispatch({ type: DELETE_PLANT_SUCCESS, payload: res.data })
+        })
+        .catch((err) => {
+            dispatch({ tyoe: DELETE_PLANT_FAILED, payload: err.response })
+        })
+    }
+}
+
+
+const plantID = () => {
+    return{
+        type: PLANT_ID,
+        payload: id
     }
 }
