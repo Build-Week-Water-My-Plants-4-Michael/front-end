@@ -170,3 +170,6 @@ const plantID = () => {
         payload: id
     }
 }
+
+
+export default actions
