@@ -21,22 +21,24 @@ export default function Login(props) {
 
     return (
         <div className="login-div">
-            <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
-                <h1>Login</h1>
-                <label>Username</label>
-                <input name="username" className="username" ref={() => register({ name: 'username', required: true })}/>
-                {
-                    errors.username && errors.username.type === 'required' && (<p>This is a required field</p>)
-                }
-                <label>Password</label>
-                <input name="password" className="password" type="password" ref={() => register({ name: 'password', required: true, minLength: 6 })} />
-                {
-                    errors.password && errors.password.type === 'required' && (<p>This is a required field</p>)
-                }
-                <button>
-                    Log in
-                </button>
-            </form>
+            <div className="card teal darken-3">
+                <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
+                    <h1>Login</h1>
+                    <label>Username</label>
+                    <input name="username" className="username" ref={() => register({ name: 'username', required: true })}/>
+                    {
+                        errors.username && errors.username.type === 'required' && (<p>This is a required field</p>)
+                    }
+                    <label>Password</label>
+                    <input name="password" className="password" type="password" ref={() => register({ name: 'password', required: true, minLength: 6 })} />
+                    {
+                        errors.password && errors.password.type === 'required' && (<p>This is a required field</p>)
+                    }
+                    <button>
+                        Log in
+                    </button>
+                </form>
+            </div>
         </div>
     )
 }

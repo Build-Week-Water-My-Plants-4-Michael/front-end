@@ -16,12 +16,8 @@ function App() {
         <div className="container">
           <div className="to-do">
             <Switch>
-              <Route path="/login">
-                <Login />
-              </Route>
-              <Route path="/register">
-                <Register />
-              </Route>
+              <Route path="/login" component={Login} />
+              <Route path="/register" component={Register} />
               <Route path="/plants">
 
               </Route>

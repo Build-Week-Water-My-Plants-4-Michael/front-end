@@ -21,27 +21,29 @@ export default function Register(props) {
 
     return (
         <div className="register-div">
-            <form className="register-form" onSubmit={handleSubmit(onSubmit)}>
-                <h1>Register</h1>
-                <label>Username</label>
-                <input name="username" className="username" ref={register({ required: "Username is a required field", minLength: {value: 6, message: "Username must be 6 or more characters"} })} />
-                {
-                    errors.username && <p>{errors.username.message}</p>
-                }
-                <label>Password</label>
-                <input name="password" className="password" type="password" ref={register({ required: "Password is a required field", minLength: {value: 6, message: "Password must be 6 characters or more"} })}/>
-                {
-                    errors.password && <p>{errors.password.message}</p>
-                }
-                <label>Phone Number</label>
-                <input name="phoneNumber" className="phone-number" ref={register({ required: "Phone Number is a required field", minLength: {value: 10, message: "Must be 10 numbers in length"}, maxLength: {value: 10, message: "Must be 10 numbers in length"} })} />
-                {
-                    errors.phoneNumber && <p>{errors.phoneNumber.message}</p>
-                }
-                <button>
-                    Register
-                </button>
-            </form>
+            <div className="card teal darken-3">
+                <form className="register-form" onSubmit={handleSubmit(onSubmit)}>
+                    <h1>Register</h1>
+                    <label>Username</label>
+                    <input name="username" className="username" ref={register({ required: "Username is a required field", minLength: {value: 6, message: "Username must be 6 or more characters"} })} />
+                    {
+                        errors.username && <p>{errors.username.message}</p>
+                    }
+                    <label>Password</label>
+                    <input name="password" className="password" type="password" ref={register({ required: "Password is a required field", minLength: {value: 6, message: "Password must be 6 characters or more"} })}/>
+                    {
+                        errors.password && <p>{errors.password.message}</p>
+                    }
+                    <label>Phone Number</label>
+                    <input name="phoneNumber" className="phone-number" ref={register({ required: "Phone Number is a required field" })} />
+                    {
+                        errors.phoneNumber && <p>Must be a number</p>
+                    }
+                    <button>
+                        Register
+                    </button>
+                </form>
+            </div>
         </div>
     )
 }
