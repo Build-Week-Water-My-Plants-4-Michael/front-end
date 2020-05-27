@@ -11,6 +11,9 @@ import{
     GET_PLANT_START,
     GET_PLANT_SUCCESS,
     GET_PLANT_FAILED,
+    GET_ALL_PLANTS_START,
+    GET_ALL_PLANTS_SUCCESS,
+    GET_ALL_PLANTS_FAILED,
     UPDATE_PLANT_START,
     UPDATE_PLANT_SUCCESS,
     UPDATE_PLANT_FAILED,
@@ -139,6 +142,29 @@ const reducer = (state = initialState, action) => {
                 }
             }
             case GET_PLANT_FAILED: {
+                console.log(action.payload)
+                return{
+                    ...state,
+                    isLoading: false,
+                    error: action.payload.error
+                }
+            }
+            case GET_ALL_PLANTS_START: {
+                return {
+                    ...state,
+                    isLoading: true,
+                }
+            }
+            case GET_ALL_PLANTS_SUCCESS: {
+                console.log(action.payload)
+                return{
+                    ...state,
+                    isLoading: false,
+                    error: null,
+                    userPlant: action.payload
+                }
+            }
+            case GET_ALL_PLANTS_FAILED: {
                 console.log(action.payload)
                 return{
                     ...state,

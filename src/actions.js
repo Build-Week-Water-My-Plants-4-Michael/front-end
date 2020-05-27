@@ -16,6 +16,10 @@ export const GET_PLANT_START = 'GET_PLANT_START'
 export const GET_PLANT_SUCCESS = 'GET_PLANT_SUCCESS'
 export const GET_PLANT_FAILED = 'GET_PLANT_FAILED'
 
+export const GET_ALL_PLANTS_START = 'GET_ALL_PLANTS_START'
+export const GET_ALL_PLANTS_SUCCESS = 'GET_ALL_PLANTS_SUCCESS'
+export const GET_ALL_PLANTS_FAILED = 'GET_ALL_PLANTS_FAILED'
+
 export const UPDATE_PLANT_START = 'UPDATE_PLANT_START'
 export const UPDATE_PLANT_SUCCESS = 'UPDATE_PLANT_SUCCESS'
 export const UPDATE_PLANT_FAILED = 'UPDATE_PLANT_FAILED'
@@ -97,11 +101,29 @@ export const getPlant = (id) => {
         })
         .catch((err) => {
             console.log(err)
-            dispatch({ rtpe: GET_PLANT_FAILED, payload: err.response.data })
+            dispatch({ type: GET_PLANT_FAILED, payload: err.response.data })
         })
     }
 }
 
+export const getAllPlants = () => {
+    return(dispatch) => {
+        dispatch({type: GET_ALL_PLANTS_START})
+
+        const headers = {
+            Authorization: localStorage.getItem('token'),
+        }
+
+        axios.get('https://water-plants-be.herokuapp.com/plants'), {headers}
+        .then((res) => {
+            dispatch({ type: GET_ALL_PLANTS_SUCCESS, payload: res.data })
+        })
+        .catch((err) => {
+            console.log(err)
+            dispatch({ type: GET_ALL_PLANTS_FAILED, payload: err. response.data })
+        })
+    }
+}
 
 export const updatePLant = (payload, id) => {
     return(dispatch) => {
