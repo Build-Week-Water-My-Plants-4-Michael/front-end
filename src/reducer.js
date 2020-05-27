@@ -5,9 +5,6 @@ import{
     LOGIN_START,
     LOGIN_SUCCESS,
     LOGIN_FAILED,
-    GET_ACCOUNT_START,
-    GET_ACCOUNT_SUCCESS,
-    GET_ACCOUNT_FAILED,
     ADD_PLANT_START,
     ADD_PLANT_SUCCESS,
     ADD_PLANT_FAILED,
@@ -26,15 +23,13 @@ const initialState = {
     error: null,
     userData: [],
     userPlant: {},
-    plantChange: ''
+    plantChange: '',
+    token: ''
 }
 
 
 const reducer = (state = initialState, action) => {
     switch(action.type){
-
-        default:
-            return state;
 
             case CREATE_USER_START:{
                 return{
@@ -43,7 +38,7 @@ const reducer = (state = initialState, action) => {
                 }
             }
 
-            case CREATE_USER_SUCCES:{
+            case CREATE_USER_SUCCESS:{
                 console.log(action.payload)
                 return{
                     ...state,
@@ -67,6 +62,7 @@ const reducer = (state = initialState, action) => {
             }
             case LOGIN_SUCCESS: {
                 console.log(action.payload)
+                localStorage.setItem("token", action.payload.token)
                 return{
                     ...state,
                     isLoading: false,
@@ -74,29 +70,6 @@ const reducer = (state = initialState, action) => {
                 }
             }
             case LOGIN_FAILED: {
-                console.log(action.payload)
-                return{
-                    ...state,
-                    isLoading: false,
-                    error: action.payload.error
-                }
-            }
-            case GET_ACCOUNT_START: {
-                return{
-                    ...state,
-                    isLoading: true,
-                }
-            }
-            case GET_ACCOUNT_SUCCESS: {
-                console.log(action.payload)
-                return{
-                    ...state,
-                    isLoading: false,
-                    error:null,
-                    userData: action.payload
-                }
-            }
-            case GET_ACCOUNT_FAILED: {
                 console.log(action.payload)
                 return{
                     ...state,
@@ -166,7 +139,7 @@ const reducer = (state = initialState, action) => {
                 }
             }
             case GET_PLANT_FAILED: {
-                console.log(aciton.payload)
+                console.log(action.payload)
                 return{
                     ...state,
                     isLoading: false,

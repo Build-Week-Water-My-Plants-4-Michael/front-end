@@ -8,10 +8,6 @@ export const LOGIN_START = 'LOGIN_START'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_FAILED = 'LOGIN_FAILED'
 
-export const GET_ACCOUNT_START = 'GET_DATA_START'
-export const GET_ACCOUNT_SUCCESS = 'GET_DATA_SUCCESS'
-export const GET_ACCOUNT_FAILED = 'GET_DATA_FAILED'
-
 export const ADD_PLANT_START = 'ADD_PLANT_START'
 export const ADD_PLANT_SUCCESS = 'ADD_PLANT_SUCCESS'
 export const ADD_PLANT_FAILED = 'ADD_PLANT_FAILED'
@@ -33,14 +29,14 @@ export const PLANT_ID ='PLANT_ID'
 
 
 
-export const createUser = (username, password) => {
+export const createUser = (username, password, phoneNumber) => {
     return(dispatch) => {
         dispatch({type: CREATE_USER_START})
 
-        return axios.post('', {username, password}) //insert end point for creating a new user account
+        return axios.post('https://water-plants-be.herokuapp.com/register', {username, password, phoneNumber}) //insert end point for creating a new user account
         .then((res) => {
             localStorage.setItem('token', res.data.token)
-            dispatch({type: CREAT_USER_SUCCESS})
+            dispatch({type: CREATE_USER_SUCCESS})
         })
         .catch((err) => {
             const payload = err.response? err.response.data : err
@@ -53,9 +49,10 @@ export const createUser = (username, password) => {
 export const login = (username, password) => {
 return(dispatch) => {
     dispatch({type: LOGIN_START})
-    return axios.post('', {username, password}) //insert end point for creating a new user account
+    return axios.post('https://water-plants-be.herokuapp.com/login', {username, password}) //insert end point for creating a new user account
      .then((res) => {
          localStorage.setItem('token', res.data.token)
+         dispatch({type: LOGIN_SUCCESS, payload: res.data})
      })
      .catch((err) => {
          const payload = err.response ? err.response.data : err
@@ -64,24 +61,6 @@ return(dispatch) => {
 }
 }
 
-export const getAccount = () => {
-    return(dispatch) => {
-        dispatch({type: GET_ACCOUNT_START})
-
-        const headers = {
-            Authorization: localStorage.getITem('token'),
-        }
-
-        axios.get('', {headers}) //insert URL
-        .then((res) => {
-            dispatch ({type: GET_ACCOUNT_SUCCESS, payload: res.data})
-        })
-        .catch((err) => {
-            console.log(err)
-            dispatch({type: GET_ACCOUNT_FAILED, payload: err.response.data})
-        })
-    }
-}
 
 export const addPlant = (payload) => {
 return(dispatch) => {
@@ -92,7 +71,7 @@ return(dispatch) => {
     }
     console.log(payload)
 
-    axios.post('', payload, {headers}) //insert URL
+    axios.post('https://water-plants-be.herokuapp.com/plants', payload, {headers})
     .then((res) => {
         dispatch ({type: ADD_PLANT_SUCCESS, payload: res.data})
     })
@@ -112,7 +91,7 @@ export const getPlant = (id) => {
             Authorzation: localStorage.getItem('token'),
         }
         
-        axios.get('', {headers}) //insert URL
+        axios.get(`https://water-plants-be.herokuapp.com/plants/${id}`, {headers}) 
         .then((res) => {
             dispatch({ type: GET_PLANT_SUCCESS, payload: res.data })
         })
@@ -132,7 +111,7 @@ export const updatePLant = (payload, id) => {
             Authorization: localStorage.getItem('token'),
         }
         console.log(payload)
-        axios.put('', payload, { headers }) //inset URL
+        axios.put(`https://water-plants-be.herokuapp.com/plants/${id}`, payload, { headers }) 
         .then((res) => {
             dispatch({ type: UPDATE_PLANT_SUCCESS, payload: res.data })
         })
@@ -152,7 +131,7 @@ export const deletePlant = (id) => {
             Authorization : localStorage.getItem('token'),
         }
 
-        axios.delete('', { headers }) //insert URL
+        axios.delete(`https://water-plants-be.herokuapp.com/plants/${id}`, { headers })
         .then((res) => {
             console.log(res)
             dispatch({ type: DELETE_PLANT_SUCCESS, payload: res.data })
@@ -164,7 +143,7 @@ export const deletePlant = (id) => {
 }
 
 
-export const plantID = () => {
+export const plantID = (id) => {
     return{
         type: PLANT_ID,
         payload: id
