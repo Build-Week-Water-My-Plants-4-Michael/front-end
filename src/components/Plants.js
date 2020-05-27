@@ -4,14 +4,13 @@ import Plant from './Plant'
 
 const Plants = (props) => {
 
-    const { plants, setPlants } = useState([])
+    const [ plants, setPlants ] = useState([])
 
     useEffect(() => {
         axios
-            .get("https://water-plants-be.herokuapp.com/plants")
+            .get("https://water-plants-be.herokuapp.com/plants", {headers: {Authorization: localStorage.getItem('token')}})
             .then(res => {
                 console.log(res)
-                setPlants(res.data.results)
             })
             .catch(err => {
                 console.log(err)
@@ -24,7 +23,7 @@ const Plants = (props) => {
 
     return (
         <div className="plants">
-            {plants.map(plant => {
+            {/*plants.map(plant => {
                 return (
                     <Plant
                         key={plant.id}
@@ -35,7 +34,7 @@ const Plants = (props) => {
                         image={plant.image}
                     />
                 )
-            })}
+            })*/}
         </div>
     )
 }
