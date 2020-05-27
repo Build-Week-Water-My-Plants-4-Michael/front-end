@@ -29,11 +29,11 @@ export const PLANT_ID ='PLANT_ID'
 
 
 
-export const createUser = (username, password, phoneNumber) => {
+export const createUser = (creds) => {
     return(dispatch) => {
         dispatch({type: CREATE_USER_START})
 
-        return axios.post('https://water-plants-be.herokuapp.com/register', {username, password, phoneNumber}) //insert end point for creating a new user account
+        return axios.post('https://water-plants-be.herokuapp.com/register', creds) //insert end point for creating a new user account
         .then((res) => {
             localStorage.setItem('token', res.data.token)
             dispatch({type: CREATE_USER_SUCCESS})
@@ -46,10 +46,10 @@ export const createUser = (username, password, phoneNumber) => {
 }
 
 
-export const login = (username, password) => {
+export const login = (creds) => {
 return(dispatch) => {
     dispatch({type: LOGIN_START})
-    return axios.post('https://water-plants-be.herokuapp.com/login', {username, password}) //insert end point for creating a new user account
+    return axios.post('https://water-plants-be.herokuapp.com/login', creds) //insert end point for creating a new user account
      .then((res) => {
          localStorage.setItem('token', res.data.token)
          dispatch({type: LOGIN_SUCCESS, payload: res.data})
@@ -103,7 +103,7 @@ export const getPlant = (id) => {
 }
 
 
-export const updatePLant = (payload, id) => {
+export const updatePlant = (payload, id) => {
     return(dispatch) => {
         dispatch({ type: UPDATE_PLANT_START })
 

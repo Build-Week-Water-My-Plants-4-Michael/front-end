@@ -6,6 +6,7 @@ import { Route, Switch, Link } from "react-router-dom"
 import Login from './components/Login'
 import Register from './components/Register'
 import Nav from './components/Navigation'
+import Plants from './components/Plants'
 
 function App() {
   return (
@@ -18,9 +19,11 @@ function App() {
             <Switch>
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
-              <Route path="/plants">
-
-              </Route>
+              <Route path="/plants" component={Plants} /> 
+              {
+                // should be a private route ^^^^^^^^
+                // Literally only using it for testing, currently.
+              }
               <Route path="/">
                 <div className="home-main">
                   <h1>Plant Parenthood</h1>
