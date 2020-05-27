@@ -3,7 +3,7 @@ import React from 'react'
 const Plants = (props) => {
     return (
         <div className="plants">
-
+            
         </div>
     )
 }
