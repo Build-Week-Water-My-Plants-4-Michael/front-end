@@ -1,6 +1,7 @@
 import React from 'react'
 import { useForm, ErrorMessage } from 'react-hook-form'
 import * as yup from "yup"
+import axios from 'axios'
 //import { connect } from 'react-redux'
 
 const registerSchema = yup.object().shape({
@@ -15,7 +16,13 @@ export default function Register(props) {
     })
 
     const onSubmit = (data) => {
-        console.log(data)
+        axios.post("https://water-plants-be.herokuapp.com/register", data)
+            .then(res => {
+                localStorage.setItem('token', res.data.token)
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
 
 
@@ -39,7 +46,7 @@ export default function Register(props) {
                     {
                         errors.phoneNumber && <p>Must be a number</p>
                     }
-                    <button>
+                    <button type="submit">
                         Register
                     </button>
                 </form>
