@@ -1,7 +1,6 @@
 import React from 'react'
-import { useForm, ErrorMessage } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
-import axios from 'axios'
 import { connect } from 'react-redux'
 import { login } from '../actions';
 
@@ -15,7 +14,7 @@ const Login = props => {
     })
     const onSubmit = data => {     
         console.log(data)
-        props.login(data.username, data.password)
+        props.login(data)
     }
     return (
         <div className="login-div">
