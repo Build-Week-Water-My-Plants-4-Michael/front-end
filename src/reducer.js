@@ -23,11 +23,12 @@ import{
 
 const initialState = {
     isLoading: false,
+    isAuthenticated: false,
     error: null,
     userData: [],
     userPlant: {},
     plantChange: '',
-    token: ''
+    token: localStorage.getItem('token')
 }
 
 
@@ -68,7 +69,9 @@ const reducer = (state = initialState, action) => {
                 localStorage.setItem("token", action.payload.token)
                 return{
                     ...state,
+                    token: localStorage.getItem("token"),
                     isLoading: false,
+                    isAuthenticated: true,
                     error: null,
                 }
             }
@@ -77,6 +80,7 @@ const reducer = (state = initialState, action) => {
                 return{
                     ...state,
                     isLoading: false,
+                    isAuthenticated: false,
                     error: action.payload.error
                 }
             }

@@ -1,9 +1,10 @@
-import React from 'react'
-import { useForm, ErrorMessage } from 'react-hook-form'
+import React, { useEffect } from 'react'
+import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
-import axios from 'axios'
 import { connect } from 'react-redux'
 import { login } from '../actions';
+import { useHistory } from 'react-router-dom'
+
 
 
 
@@ -12,12 +13,24 @@ const loginSchema = yup.object().shape({
     password: yup.string().required(),
 })
 const Login = props => {
+const history = useHistory();
+
+
+useEffect(() => {
+    if (props.isAuthenticated){
+        history.push("/plants")
+    }
+},[props.isAuthenticated])
+
+
+
     const { register, handleSubmit, errors } = useForm({
         validationSchema: loginSchema
     })
     const onSubmit = data => {     
         console.log(data)
-        props.login(data.username, data.password)
+        props.login(data)
+        history.push("/plants")
     }
     return (
         <div className="login-div">
@@ -43,6 +56,10 @@ const Login = props => {
     )
 }
 
+const mapStateToProps = (state) => {
+    return {
+        isAuthenticated: state.isAuthenticated
+    }
+}
 
-
-export default connect(null,{login})(Login)
+export default connect(mapStateToProps,{login})(Login)

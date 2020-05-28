@@ -27,149 +27,149 @@ export const UPDATE_PLANT_FAILED = 'UPDATE_PLANT_FAILED'
 export const DELETE_PLANT_START = 'DELETE_PLANT_START'
 export const DELETE_PLANT_SUCCESS = 'DELETE_PLANT_SUCCESS'
 export const DELETE_PLANT_FAILED = 'DELETE_PLANT_FAILED'
-
+ 
 export const PLANT_ID ='PLANT_ID'
-
-
-
-
-export const createUser = (username, password, phoneNumber) => {
+ 
+ 
+ 
+ 
+export const createUser = (creds) => {
     return(dispatch) => {
         dispatch({type: CREATE_USER_START})
-
-        return axios.post('https://water-plants-be.herokuapp.com/register', {username, password, phoneNumber}) //insert end point for creating a new user account
+ 
+        return axios.post('https://waterplants.herokuapp.com/register', creds) //insert end point for creating a new user account
         .then((res) => {
             localStorage.setItem('token', res.data.token)
             dispatch({type: CREATE_USER_SUCCESS})
-        })
+        })    
         .catch((err) => {
             const payload = err.response? err.response.data : err
             dispatch({type: CREATE_USER_FAILED, payload})
-        })
-    }
-}
-
-
-export const login = (username, password) => {
+        })    
+    }    
+}    
+ 
+ 
+export const login = (creds) => {
 return(dispatch) => {
     dispatch({type: LOGIN_START})
-    return axios.post('https://water-plants-be.herokuapp.com/login', {username, password}) //insert end point for creating a new user account
+    return axios.post('https://waterplants.herokuapp.com/login', creds) //insert end point for creating a new user account
      .then((res) => {
          localStorage.setItem('token', res.data.token)
          dispatch({type: LOGIN_SUCCESS, payload: res.data})
-     })
+     })    
      .catch((err) => {
          const payload = err.response ? err.response.data : err
          dispatch({ type: LOGIN_FAILED, payload})
-     })
+     })    
+}     
 }
-}
-
-
+ 
+ 
 export const addPlant = (payload) => {
 return(dispatch) => {
     dispatch({type: ADD_PLANT_START})
-
+ 
     const headers = {
         Authorization: localStorage.getItem('token'),
-    }
+    }    
     console.log(payload)
-
-    axios.post('https://water-plants-be.herokuapp.com/plants', payload, {headers})
+ 
+    axios.post('https://waterplants.herokuapp.com/plants', payload, {headers})
     .then((res) => {
         dispatch ({type: ADD_PLANT_SUCCESS, payload: res.data})
-    })
+    })    
     .catch((err) => {
         console.log(err)
         dispatch({type: ADD_PLANT_FAILED, payload: err})
-    })
-}
+    })    
+}    
 }
 
 
 export const getPlant = (id) => {
     return (dispatch) => {
         dispatch ({ type: GET_PLANT_START })
-
+        
         const headers = {
             Authorzation: localStorage.getItem('token'),
-        }
+        }    
         
-        axios.get(`https://water-plants-be.herokuapp.com/plants/${id}`, {headers}) 
+        axios.get(`https://waterplants.herokuapp.com/plants/${id}`, {headers})
         .then((res) => {
             dispatch({ type: GET_PLANT_SUCCESS, payload: res.data })
-        })
+        })    
         .catch((err) => {
             console.log(err)
-            dispatch({ type: GET_PLANT_FAILED, payload: err.response.data })
-        })
-    }
-}
+            dispatch({ rtpe: GET_PLANT_FAILED, payload: err.response.data })
+        })    
+    }    
+}    
 
 export const getAllPlants = () => {
-    return(dispatch) => {
-        dispatch({type: GET_ALL_PLANTS_START})
-
-        const headers = {
-            Authorization: localStorage.getItem('token'),
-        }
-
-        axios.get('https://water-plants-be.herokuapp.com/plants'), {headers}
-        .then((res) => {
-            dispatch({ type: GET_ALL_PLANTS_SUCCESS, payload: res.data })
-        })
-        .catch((err) => {
-            console.log(err)
-            dispatch({ type: GET_ALL_PLANTS_FAILED, payload: err. response.data })
-        })
-    }
+        return(dispatch) => {
+                dispatch({type: GET_ALL_PLANTS_START})
+        
+                const headers = {
+                        Authorization: localStorage.getItem('token'),
+                    }
+            
+                    axios.get('https://waterplants.herokuapp.com/plants', {headers})
+                    .then((res) => {
+                            dispatch({ type: GET_ALL_PLANTS_SUCCESS, payload: res.data })
+                        })
+                        .catch((err) => {
+                                console.log(err)
+                                dispatch({ type: GET_ALL_PLANTS_FAILED, payload: err. response.data })
+                            })
+                        }
 }
 
-export const updatePLant = (payload, id) => {
+ 
+export const updatePlant = (payload, id) => {
     return(dispatch) => {
         dispatch({ type: UPDATE_PLANT_START })
-
+ 
         const headers = {
             Authorization: localStorage.getItem('token'),
-        }
+        }    
         console.log(payload)
-        axios.put(`https://water-plants-be.herokuapp.com/plants/${id}`, payload, { headers }) 
+        axios.put(`https://waterplants.herokuapp.com/plants/${id}`, payload, { headers })
         .then((res) => {
             dispatch({ type: UPDATE_PLANT_SUCCESS, payload: res.data })
-        })
+        })    
         .catch((err) => {
             dispatch({ type: UPDATE_PLANT_FAILED })
-        })
-    }
-}
-
-
-
+        })    
+    }    
+}    
+ 
+ 
+ 
 export const deletePlant = (id) => {
     return(dispatch) => {
         dispatch({ type: DELETE_PLANT_START })
-
+ 
         const headers = {
             Authorization : localStorage.getItem('token'),
-        }
-
-        axios.delete(`https://water-plants-be.herokuapp.com/plants/${id}`, { headers })
+        }    
+ 
+        axios.delete(`https://waterplants.herokuapp.com/plants/${id}`, { headers })
         .then((res) => {
             console.log(res)
             dispatch({ type: DELETE_PLANT_SUCCESS, payload: res.data })
-        })
+        })    
         .catch((err) => {
             dispatch({ tyoe: DELETE_PLANT_FAILED, payload: err.response })
-        })
-    }
-}
-
-
+        })    
+    }    
+}    
+ 
+ 
 export const plantID = (id) => {
     return{
         type: PLANT_ID,
         payload: id
-    }
-}
-
+    }    
+}    
 
