@@ -1,6 +1,13 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { deletePlant } from '../actions'
 
 const GetPlant = props => {
+
+    const _delete = (id) => {
+        props.deletePlant(id)
+    }
+
     return (
             <div className="plant card teal darken-3">
                     <div className="card-image">
@@ -16,10 +23,12 @@ const GetPlant = props => {
                         <ul>
                             <li>Species: {props.species}</li>
                             <li>H2O Frequency{props.h2oFrequency}</li>
+                            <br />
+                            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</li>
                         </ul>
                     </div>
                     <div className="card-action">
-                        <a href={`delete/${props.id}`}>Delete Plant</a>
+                        <a onClick={() => { _delete(props.id) }}>Delete Plant</a>
                     
                         <a href={`update/${props.id}`}>Update Plant</a>
                     </div>
@@ -27,4 +36,4 @@ const GetPlant = props => {
     )
 }
 
-export default GetPlant
+export default connect(null, {deletePlant}) (GetPlant)
