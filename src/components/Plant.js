@@ -5,7 +5,6 @@ import { deletePlant } from '../actions'
 const GetPlant = props => {
 
     const _delete = (id) => {
-        console.log("clicked")
         props.deletePlant(id)
     }
 

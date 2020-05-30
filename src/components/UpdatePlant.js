@@ -14,7 +14,7 @@ const schema = yup.object().shape({
     image: yup.string().url("Must be a valid URL to an image").required()
 })
 
-const UpdatePlant = props => {
+const UpdatePlant = () => {
 
     const { register, handleSubmit, errors } = useForm({
         validationSchema: schema
@@ -37,7 +37,7 @@ const UpdatePlant = props => {
 
     const onSubmit = data => {
         console.log(data)
-        props.updatePlant({
+        updatePlant({
             'id': id,
             'nickname': data.name,
             'species': data.species,

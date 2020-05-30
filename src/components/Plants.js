@@ -7,8 +7,12 @@ import { array } from 'yup'
 const Plants = (props) => {
 
     const [ plants, setPlants ] = useState([])
-    const [ allPlants, setAll ] = useState([])
-    let filtered = []
+    const [ results, setResults ] = useState([])
+    const [ term, setTerm ] = useState("")
+
+    const filterResults = (e) => {
+        setTerm(e.target.value)
+    }
 
     useEffect(() => {
         axiosWithAuth()
@@ -16,33 +20,18 @@ const Plants = (props) => {
             .then(res => {
                 console.log(res.data)
                 setPlants(res.data)
-                setAll(res.data)
+                setResults(res.data)
             })
             .catch(err => {
                 console.log(err)
             })
     }, [])
 
-    const filterResults = (e) => {
-        console.log(e.target.value)
-        plants.forEach((el) => {
-            if (el.nickname.toLowerCase().includes(e.target.value.toLowerCase())) {
-                console.log(el.nickname)
-                if (!filtered.includes(el)) {
-                    filtered.push(el)
-                }
-                console.log(filtered)
-            } else {
-                filtered.splice(el)
-            }
-        })
-        setPlants(filtered)
-        console.log(e.target.value.length)
-        if (e.target.value.length == 0) {
-            setPlants(allPlants)
-        }
-    }
-
+    useEffect(() => {
+        const res = plants.filter(_plant => _plant.nickname.toLowerCase().includes(term))
+        setResults(res)
+    }, [term])
+    
     return (
         <div className="all-plants">
             <h1>Plants</h1>
@@ -53,7 +42,7 @@ const Plants = (props) => {
                 </div>
             </div>
             <div className="row">
-                {plants.map(plant => {
+                {results.map(plant => {
                     return (
                         <div className="col s4 m4" key={plant.id}>
                             <Plant
