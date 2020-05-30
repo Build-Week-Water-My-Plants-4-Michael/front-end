@@ -7,41 +7,24 @@ import { array } from 'yup'
 const Plants = (props) => {
 
     const [ plants, setPlants ] = useState([])
-    const [ allPlants, setAll ] = useState([])
-    let filtered = []
+    const [ results, setResults ] = useState("")
+
+    const filterResults = (e) => {
+        setResults(e.target.value)
+    }
 
     useEffect(() => {
         axiosWithAuth()
             .get("https://waterplants.herokuapp.com/plants")
             .then(res => {
                 console.log(res.data)
-                setPlants(res.data)
-                setAll(res.data)
+                const _res = res.data.filter(plant => plant.nickname.toLowerCase().includes(results))
+                setPlants(_res)
             })
             .catch(err => {
                 console.log(err)
             })
-    }, [])
-
-    const filterResults = (e) => {
-        console.log(e.target.value)
-        plants.forEach((el) => {
-            if (el.nickname.toLowerCase().includes(e.target.value.toLowerCase())) {
-                console.log(el.nickname)
-                if (!filtered.includes(el)) {
-                    filtered.push(el)
-                }
-                console.log(filtered)
-            } else {
-                filtered.splice(el)
-            }
-        })
-        setPlants(filtered)
-        console.log(e.target.value.length)
-        if (e.target.value.length == 0) {
-            setPlants(allPlants)
-        }
-    }
+    }, [results])
 
     return (
         <div className="all-plants">
