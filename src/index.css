@@ -38,7 +38,7 @@ nav {
   padding: 0 5%;
 }
 
-.login-div button {
+button {
   background: #004d40;
   border: none;
   padding: 1%;
@@ -53,15 +53,6 @@ nav {
 
 .register-div form {
   padding: 0 5%;
-}
-
-.register-div button {
-  background: #004d40;
-  border: none;
-  padding: 1%;
-  border-radius: 5px;
-  margin: 1% 0;
-  color: white;
 }
 
 input {

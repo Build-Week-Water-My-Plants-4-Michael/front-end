@@ -38,7 +38,7 @@ const AddPlant = props => {
             'id': number,
             'nickname': data.name,
             'species': data.species,
-            'h20Frequency': data.h20,
+            'h2oFrequency': data.h20,
             'image': data.image
         })
     }
