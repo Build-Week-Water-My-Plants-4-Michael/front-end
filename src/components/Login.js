@@ -23,18 +23,6 @@ const Login = props => {
         history.push("/")
     }
 
-    // to try and see why we get the 401
-    const sample = () => {
-        axiosWithAuth()
-        .get("/plants")
-        .then(res => {
-            console.log(res)
-            //BUT YOU KNOW, LETS NOT GET HERE CUS 401 UNAUTHORIZED EVEN THOUGH THE TOKEN EXISTS :) THANKS AXIOS
-        })
-        .catch(err => {
-            console.log(err)
-        })
-    }
     return (
         <div className="login-div">
             <div className="card teal darken-3">
@@ -52,15 +40,6 @@ const Login = props => {
                     }
                     <button type="submit">
                         Log In
-                    </button>
-                </form>
-            </div>
-            <br/>
-            <div className="card teal darken-3">
-                <form className="login-form" onSubmit={handleSubmit(sample)}>
-                    
-                    <button type="submit">
-                        Test GET /plants
                     </button>
                 </form>
             </div>

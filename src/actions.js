@@ -114,7 +114,8 @@ export const updatePlant = (payload, id) => {
             dispatch({ type: UPDATE_PLANT_SUCCESS, payload: res.data })
         })
         .catch((err) => {
-            dispatch({ type: UPDATE_PLANT_FAILED })
+            console.log(err)
+            dispatch({ type: UPDATE_PLANT_FAILED, payload: err.response.data })
         })
     }
 }
@@ -129,6 +130,7 @@ export const deletePlant = (id) => {
             Authorization : localStorage.getItem('token'),
         }
 
+        console.log("delete")
         axios.delete(`https://waterplants.herokuapp.com/plants/${id}`, { headers })
         .then((res) => {
             console.log(res)

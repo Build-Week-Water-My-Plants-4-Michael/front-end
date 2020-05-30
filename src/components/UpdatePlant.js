@@ -3,8 +3,9 @@ import * as yup from 'yup'
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { axiosWithAuth } from '../axiosWithAuth/axiosWithAuth'
-import { connect } from 'react-redux'
 import { updatePlant } from '../actions'
+import { connect } from 'react-redux'
+import Plant from './Plant'
 
 const schema = yup.object().shape({
     name: yup.string().required(),
@@ -48,7 +49,7 @@ const UpdatePlant = () => {
     //
 
     return (
-        <div className="add-plant">
+        <div className="update-plant">
             <div className="card teal darken-3">
                 <h1>Update plant</h1>
                 <form className="add-plant-form" onSubmit={handleSubmit(onSubmit)}>
@@ -77,6 +78,18 @@ const UpdatePlant = () => {
                     </button>
                 </form>
             </div>
+            <div className="plants row">
+            <div className="col s8 m8 offset-s2 offset-m2">
+                <Plant
+                    key={plant.id}
+                    id={plant.id}
+                    nickname={plant.nickname}
+                    species={plant.species}
+                    h2oFrequency={plant.h2oFrequency}
+                    image={plant.image}
+                />
+            </div>
+        </div>
         </div>
     )
 }

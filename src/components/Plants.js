@@ -4,7 +4,7 @@ import Plant from './Plant'
 import { axiosWithAuth } from '../axiosWithAuth/axiosWithAuth'
 import { array } from 'yup'
 
-const Plants = () => {
+const Plants = (props) => {
 
     const [ plants, setPlants ] = useState([])
     const [ results, setResults ] = useState([])
