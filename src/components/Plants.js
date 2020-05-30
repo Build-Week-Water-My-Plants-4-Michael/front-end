@@ -7,7 +7,6 @@ import { array } from 'yup'
 const Plants = (props) => {
 
     const [ plants, setPlants ] = useState([])
-    const [ filterPlants, setFilterPlants ] = useState([])
     let filtered = []
 
     useEffect(() => {
@@ -16,7 +15,6 @@ const Plants = (props) => {
             .then(res => {
                 console.log(res.data)
                 setPlants(res.data)
-                setFilterPlants(res.data)
             })
             .catch(err => {
                 console.log(err)
@@ -36,7 +34,7 @@ const Plants = (props) => {
                 filtered.splice(el)
             }
         })
-        setFilterPlants(filtered)
+        setPlants(filtered)
     }
 
     // This is gonna throw an error for trying to map undefined, unless the axios.get() goes through.
@@ -53,7 +51,7 @@ const Plants = (props) => {
                 </div>
             </div>
             <div className="row">
-                {filterPlants.map(plant => {
+                {plants.map(plant => {
                     return (
                         <div className="col s4 m4" key={plant.id}>
                             <Plant
