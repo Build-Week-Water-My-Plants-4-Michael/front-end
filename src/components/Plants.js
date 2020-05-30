@@ -7,6 +7,7 @@ import { array } from 'yup'
 const Plants = (props) => {
 
     const [ plants, setPlants ] = useState([])
+    const [ allPlants, setAll ] = useState([])
     let filtered = []
 
     useEffect(() => {
@@ -15,6 +16,7 @@ const Plants = (props) => {
             .then(res => {
                 console.log(res.data)
                 setPlants(res.data)
+                setAll(res.data)
             })
             .catch(err => {
                 console.log(err)
@@ -35,11 +37,11 @@ const Plants = (props) => {
             }
         })
         setPlants(filtered)
+        console.log(e.target.value.length)
+        if (e.target.value.length == 0) {
+            setPlants(allPlants)
+        }
     }
-
-    // This is gonna throw an error for trying to map undefined, unless the axios.get() goes through.
-    // Basically, until we can have constant authorization throughout the app, I won't be able to proceed.
-    // Hopefully we can get through some stuff today. :)
 
     return (
         <div className="all-plants">
