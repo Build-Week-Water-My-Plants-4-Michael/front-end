@@ -1,12 +1,12 @@
 import axios from "axios";
 
-export const axiosWithAuth = async () => {
-  const token = localStorage.getItem('token');
+export const axiosWithAuth = () => {
 
   return axios.create({
-      baseURL: "https://water-plants-be.herokuapp.com/",
+      baseURL: "https://waterplants.herokuapp.com",
       headers: {
-          Authorization: token
-      },
+          authorization: localStorage.getItem('token'),
+          'x-auth-token': localStorage.getItem('token')
+      }
   });
 };

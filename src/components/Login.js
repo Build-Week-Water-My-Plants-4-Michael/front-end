@@ -2,7 +2,9 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { connect } from 'react-redux'
-import { login } from '../actions';
+import { login } from '../actions'
+import { axiosWithAuth } from '../axiosWithAuth/axiosWithAuth'
+import { useHistory } from 'react-router-dom'
 
 const loginSchema = yup.object().shape({
     username: yup.string().required(),
@@ -12,9 +14,26 @@ const Login = props => {
     const { register, handleSubmit, errors } = useForm({
         validationSchema: loginSchema
     })
+
+    let history = useHistory()
+
     const onSubmit = data => {     
         console.log(data)
         props.login(data)
+        history.push("/")
+    }
+
+    // to try and see why we get the 401
+    const sample = () => {
+        axiosWithAuth()
+        .get("/plants")
+        .then(res => {
+            console.log(res)
+            //BUT YOU KNOW, LETS NOT GET HERE CUS 401 UNAUTHORIZED EVEN THOUGH THE TOKEN EXISTS :) THANKS AXIOS
+        })
+        .catch(err => {
+            console.log(err)
+        })
     }
     return (
         <div className="login-div">
@@ -36,7 +55,20 @@ const Login = props => {
                     </button>
                 </form>
             </div>
+            <br/>
+            <div className="card teal darken-3">
+                <form className="login-form" onSubmit={handleSubmit(sample)}>
+                    
+                    <button type="submit">
+                        Test GET /plants
+                    </button>
+                </form>
+            </div>
         </div>
+
+                   
+                    
+
     )
 }
 

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { BrowserRouter } from 'react-router-dom'
 
 export const CREATE_USER_START = 'CREATE_USER_START'
 export const CREATE_USER_SUCCESS = 'CREATE_USER_SUCCESS'
@@ -26,14 +27,11 @@ export const DELETE_PLANT_FAILED = 'DELETE_PLANT_FAILED'
 
 export const PLANT_ID ='PLANT_ID'
 
-
-
-
 export const createUser = (creds) => {
     return(dispatch) => {
         dispatch({type: CREATE_USER_START})
 
-        return axios.post('https://water-plants-be.herokuapp.com/register', creds) //insert end point for creating a new user account
+        return axios.post('https://waterplants.herokuapp.com/register', creds) //insert end point for creating a new user account
         .then((res) => {
             localStorage.setItem('token', res.data.token)
             dispatch({type: CREATE_USER_SUCCESS})
@@ -49,7 +47,7 @@ export const createUser = (creds) => {
 export const login = (creds) => {
 return(dispatch) => {
     dispatch({type: LOGIN_START})
-    return axios.post('https://water-plants-be.herokuapp.com/login', creds) //insert end point for creating a new user account
+    return axios.post('https://waterplants.herokuapp.com/login', creds) //insert end point for creating a new user account
      .then((res) => {
          localStorage.setItem('token', res.data.token)
          dispatch({type: LOGIN_SUCCESS, payload: res.data})
@@ -71,7 +69,7 @@ return(dispatch) => {
     }
     console.log(payload)
 
-    axios.post('https://water-plants-be.herokuapp.com/plants', payload, {headers})
+    axios.post('https://waterplants.herokuapp.com/plants', payload, {headers})
     .then((res) => {
         dispatch ({type: ADD_PLANT_SUCCESS, payload: res.data})
     })
@@ -91,7 +89,7 @@ export const getPlant = (id) => {
             Authorzation: localStorage.getItem('token'),
         }
         
-        axios.get(`https://water-plants-be.herokuapp.com/plants/${id}`, {headers}) 
+        axios.get(`https://waterplants.herokuapp.com/plants/${id}`, {headers}) 
         .then((res) => {
             dispatch({ type: GET_PLANT_SUCCESS, payload: res.data })
         })
@@ -111,7 +109,7 @@ export const updatePlant = (payload, id) => {
             Authorization: localStorage.getItem('token'),
         }
         console.log(payload)
-        axios.put(`https://water-plants-be.herokuapp.com/plants/${id}`, payload, { headers }) 
+        axios.put(`https://waterplants.herokuapp.com/plants/${id}`, payload, { headers }) 
         .then((res) => {
             dispatch({ type: UPDATE_PLANT_SUCCESS, payload: res.data })
         })
@@ -131,7 +129,7 @@ export const deletePlant = (id) => {
             Authorization : localStorage.getItem('token'),
         }
 
-        axios.delete(`https://water-plants-be.herokuapp.com/plants/${id}`, { headers })
+        axios.delete(`https://waterplants.herokuapp.com/plants/${id}`, { headers })
         .then((res) => {
             console.log(res)
             dispatch({ type: DELETE_PLANT_SUCCESS, payload: res.data })
