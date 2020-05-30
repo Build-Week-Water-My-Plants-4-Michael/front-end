@@ -21,6 +21,11 @@ nav {
   background: #00695c !important;
 }
 
+#dropdown1 a {
+  color: white;
+  text-decoration: none;;
+}
+
 .brand-logo {
   padding-right: 1% !important;
 }
@@ -62,4 +67,12 @@ nav {
 input {
   text-align: center;
   color: white;
+}
+
+.plants {
+  margin-top: 10%;
+}
+
+.plantList {
+  margin-top: 2%;
 }

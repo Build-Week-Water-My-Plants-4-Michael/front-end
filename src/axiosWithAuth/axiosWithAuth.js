@@ -4,9 +4,10 @@ export const axiosWithAuth = () => {
   const token = localStorage.getItem('token');
 
   return axios.create({
-      baseURL: "https://water-plants-be.herokuapp.com/",
+      baseURL: "https://waterplants.herokuapp.com",
       headers: {
-          Authorization: token
-      },
+          authorization: localStorage.getItem('token'),
+          'x-auth-token': localStorage.getItem('token')
+      }
   });
 };

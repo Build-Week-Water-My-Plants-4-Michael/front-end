@@ -1,8 +1,49 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Link, useHistory } from 'react-router-dom'
+import M from 'materialize-css'
 
-const Nav = (props) => {
-    return (
+function Nav() {
+
+    const token = localStorage.getItem('token')
+    const history = useHistory()
+
+    useEffect(() => {
+      if (token) {
+          let elems = document.querySelectorAll('.dropdown-trigger');
+          M.Dropdown.init(elems, {inDuration: 300, outDuration: 225});
+      }
+    })
+
+    const handleLogout = () => {
+      localStorage.removeItem('token')
+      history.push("/")
+      window.location.reload()
+    }
+
+    if (token) {
+
+      return (
+        <div>
+          <ul id="dropdown1" class="dropdown-content teal white-text">
+            <li><Link to="/plants">All Plants</Link></li>
+            <li><Link to="/add">Add</Link></li>
+          </ul>
+          <nav>
+            <div className="nav-wrapper">
+              <a href="#" className="brand-logo right">Plant Parenthood</a>
+              <ul id="nav-mobile" className="left hide-on-med-and-down">
+                <li><Link to="/">Home</Link></li>
+                <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Plants</a></li>
+                <li><a href="#" onClick={handleLogout}>Logout</a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+    )
+
+    } else {
+
+      return (
         <nav>
           <div className="nav-wrapper">
             <a href="#" className="brand-logo right">Plant Parenthood</a>
@@ -14,6 +55,8 @@ const Nav = (props) => {
           </div>
         </nav>
     )
+
+    }
 }
 
 export default Nav
