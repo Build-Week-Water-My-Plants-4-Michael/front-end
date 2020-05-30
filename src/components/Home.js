@@ -12,11 +12,8 @@ export default function Home() {
                 <h1>Plant Parenthood</h1>
                 Welcome back, user.
                 <hr />
-                    <span className="left">
-                        Plants
-                    </span><br />
                     <div className="plantList">
-                        <Plants />
+                        <Plants/>
                     </div>
             </div>
         )
