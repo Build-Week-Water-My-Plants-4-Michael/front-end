@@ -24,7 +24,7 @@ function Nav() {
 
       return (
         <div>
-          <ul id="dropdown1" class="dropdown-content teal white-text">
+          <ul id="dropdown1" className="dropdown-content teal white-text">
             <li><Link to="/plants">All Plants</Link></li>
             <li><Link to="/add">Add</Link></li>
           </ul>
@@ -33,7 +33,7 @@ function Nav() {
               <a href="#" className="brand-logo right">Plant Parenthood</a>
               <ul id="nav-mobile" className="left hide-on-med-and-down">
                 <li><Link to="/">Home</Link></li>
-                <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Plants</a></li>
+                <li><a className="dropdown-trigger" href="#!" data-target="dropdown1">Plants</a></li>
                 <li><a href="#" onClick={handleLogout}>Logout</a></li>
               </ul>
             </div>
