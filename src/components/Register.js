@@ -2,7 +2,9 @@ import React from 'react'
 import { useForm, ErrorMessage } from 'react-hook-form'
 import * as yup from "yup"
 import axios from 'axios'
-//import { connect } from 'react-redux'
+import { createUser } from '../actions'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 const registerSchema = yup.object().shape({
     username: yup.string().required(),
@@ -10,7 +12,7 @@ const registerSchema = yup.object().shape({
     phoneNumber: yup.number().required(),
 })
 
-export default function Register(props) {
+export function Register(props) {
     const { register, handleSubmit, errors } = useForm({
         validationSchema: registerSchema
     })
@@ -55,3 +57,18 @@ export default function Register(props) {
         </div>
     )
 }
+
+const mapStateToProps = (state) => {
+    return { 
+        isLoading: state.isLoading,
+        error: state.error
+    }
+}
+
+const mapDispatchToProps = {
+    createUser
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register)
+
+
