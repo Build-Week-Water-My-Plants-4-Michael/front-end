@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { login } from '../actions'
 import { axiosWithAuth } from '../axiosWithAuth/axiosWithAuth'
 import { useHistory } from 'react-router-dom'
+import Nav from './Navigation'
 
 const loginSchema = yup.object().shape({
     username: yup.string().required(),
@@ -36,6 +37,7 @@ useEffect(() => {
 
     return (
         <div className="login-div">
+            <Nav/>
             <div className="card teal darken-3">
                 <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
                     <h1>Login</h1>

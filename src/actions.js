@@ -159,7 +159,7 @@ export const deletePlant = (id) => {
             dispatch({ type: DELETE_PLANT_SUCCESS, payload: res.data })
         })    
         .catch((err) => {
-            dispatch({ tyoe: DELETE_PLANT_FAILED, payload: err.response })
+            dispatch({ type: DELETE_PLANT_FAILED, payload: err.response })
         })    
     }    
 }    

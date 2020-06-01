@@ -2,7 +2,7 @@ import { useForm, ErrorMessage } from 'react-hook-form'
 import * as yup from 'yup'
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
-import { addPlant } from '../actions'
+import { addPlant, getPlant, deletePlant } from '../actions'
 import { axiosWithAuth } from '../axiosWithAuth/axiosWithAuth'
 
 const schema = yup.object().shape({
@@ -75,6 +75,17 @@ const AddPlant = props => {
             </div>
         </div>
     )
+}
+
+
+
+const mapStateToProps = (state) => ({
+    plantChange: state.plantChange
+})
+
+const mapDispatchToProps = {
+    getPlant,
+    deletePlant,
 }
 
 export default connect(null, {addPlant})(AddPlant)

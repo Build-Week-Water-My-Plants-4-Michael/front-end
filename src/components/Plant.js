@@ -1,14 +1,44 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { deletePlant } from '../actions'
-
+import { deletePlant, updatePlant, getPlant } from '../actions'
+import { Link, useHistory } from 'react-router-dom'
+ 
 const GetPlant = props => {
 
     const _delete = (id) => {
         props.deletePlant(id)
     }
 
+
+    const history = useHistory()
+
+    const handleLogout = (props) => {
+        localStorage.removeItem('token')
+        history.push("/")
+        window.location.reload()
+      }
+
+
+
     return (
+        <>
+          <div>
+          <ul id="dropdown1" className="dropdown-content teal white-text">
+            <li><Link to="/plants">All Plants</Link></li>
+            <li><Link to="/add">Add</Link></li>
+          </ul>
+          <nav>
+            <div className="nav-wrapper">
+              <a href="#" className="brand-logo right">Plant Parenthood</a>
+              <ul id="nav-mobile" className="left hide-on-med-and-down">
+                <li><Link to="/">Home</Link></li>
+                <li><a className="dropdown-trigger" href="#!" data-target="dropdown1">Plants</a></li>
+                <li><a href="#" onClick={handleLogout}>Logout</a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+        
             <div className="plant card teal darken-3">
                     <div className="card-image">
                         <img src="https://gearpatrol.com/wp-content/uploads/2019/01/10-Best-Indoor-Plants-Gear-Patrol-lead-full.jpg" alt={props.species}/>
@@ -33,7 +63,11 @@ const GetPlant = props => {
                         <a href={`update/${props.id}`}>Update Plant</a>
                     </div>
             </div>
+            </>
     )
 }
+
+
+
 
 export default connect(null, {deletePlant}) (GetPlant)

@@ -3,6 +3,9 @@ import axios from 'axios'
 import Plant from './Plant'
 import { axiosWithAuth } from '../axiosWithAuth/axiosWithAuth'
 import { array } from 'yup'
+import { getAllPlants } from '../actions';
+import { connect } from 'react-redux'
+import { Link, useHistory } from 'react-router-dom';
 
 const Plants = (props) => {
     const [ plants, setPlants ] = useState([])
@@ -12,6 +15,15 @@ const Plants = (props) => {
     const filterResults = (e) => {
         setTerm(e.target.value)
     }
+
+    const history = useHistory();
+
+    const handleLogout = (props) => {
+        localStorage.removeItem('token')
+        history.push("/")
+        window.location.reload()
+      }
+
 
     useEffect(() => {
         axiosWithAuth()
@@ -32,6 +44,23 @@ const Plants = (props) => {
     }, [term])
     
     return (
+        <>
+         <div>
+          <ul id="dropdown1" className="dropdown-content teal white-text">
+            <li><Link to="/plants">All Plants</Link></li>
+            <li><Link to="/add">Add</Link></li>
+          </ul>
+          <nav>
+            <div className="nav-wrapper">
+              <a href="#" className="brand-logo right">Plant Parenthood</a>
+              <ul id="nav-mobile" className="left hide-on-med-and-down">
+                <li><Link to="/">Home</Link></li>
+                <li><a className="dropdown-trigger" href="#!" data-target="dropdown1">Plants</a></li>
+                <li><a href="#" onClick={handleLogout}>Logout</a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
         <div className="all-plants">
             <h1>Plants</h1>
             <div className="row">
@@ -57,7 +86,21 @@ const Plants = (props) => {
                 })}
             </div>
         </div>
+        </>
     )
 }
 
-export default Plants
+
+const mapStateToProps = (state) => ({
+    userPlant: state.userPlant
+})
+
+
+const mapDispatchToProps = {
+    getAllPlants
+}
+
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Plants)

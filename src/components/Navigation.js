@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import M from 'materialize-css'
 
-function Nav() {
+function Nav(props) {
 
     const token = localStorage.getItem('token')
     const history = useHistory()
@@ -17,7 +17,7 @@ function Nav() {
       }
     })
 
-    const handleLogout = () => {
+    const handleLogout = (props) => {
       localStorage.removeItem('token')
       history.push("/")
       window.location.reload()
