@@ -21,6 +21,11 @@ nav {
   background: #00695c !important;
 }
 
+#dropdown1 a {
+  color: white;
+  text-decoration: none;;
+}
+
 .brand-logo {
   padding-right: 1% !important;
 }
@@ -33,7 +38,7 @@ nav {
   padding: 0 5%;
 }
 
-.login-div button {
+button {
   background: #004d40;
   border: none;
   padding: 1%;
@@ -46,20 +51,25 @@ nav {
   padding: 10% 20%;
 }
 
-.register-div form {
-  padding: 0 5%;
+
+.home-sign-up{
+  font-size: 5rem;
 }
 
-.register-div button {
-  background: #004d40;
-  border: none;
-  padding: 1%;
-  border-radius: 5px;
-  margin: 1% 0;
-  color: white;
+
+.register-div form {
+  padding: 0 5%;
 }
 
 input {
   text-align: center;
   color: white;
+}
+
+.plants {
+  margin-top: 10%;
+}
+
+.plantList {
+  margin-top: 2%;
 }

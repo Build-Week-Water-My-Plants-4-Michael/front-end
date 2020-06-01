@@ -16,8 +16,9 @@ export default function Register(props) {
     })
 
     const onSubmit = (data) => {
-        axios.post("https://water-plants-be.herokuapp.com/register", data)
+        axios.post("https://waterplants.herokuapp.com/register", data)
             .then(res => {
+                console.log(res)
                 localStorage.setItem('token', res.data.token)
             })
             .catch(error => {

@@ -1,12 +1,16 @@
 import React from 'react';
 import './App.css';
 import 'materialize-css/dist/css/materialize.min.css'
-import { Route, Switch, Link } from "react-router-dom"
+import { Route, Switch } from "react-router-dom"
 
 import Login from './components/Login'
 import Register from './components/Register'
 import Nav from './components/Navigation'
 import Plants from './components/Plants'
+import ViewPlant from './components/ViewPlant'
+import AddPlant from './components/AddPlant'
+import Home from './components/Home'
+import UpdatePlant from './components/UpdatePlant'
 
 function App() {
   return (
@@ -19,16 +23,16 @@ function App() {
             <Switch>
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
-              <Route path="/plants" component={Plants} /> 
-              {
-                // should be a private route ^^^^^^^^
-                // Literally only using it for testing, currently.
-              }
+              <Route path="/plants" component={Plants} />
+              <Route path='/add' component={AddPlant} />
+              <Route path='/update/:id'>
+                <UpdatePlant />
+              </Route>
+              <Route path="/view/:id">
+                <ViewPlant />
+              </Route>
               <Route path="/">
-                <div className="home-main">
-                  <h1>Plant Parenthood</h1>
-                  <Link to="/register"><span className="home-sign-up"><a href="#">Sign me up!</a></span></Link>
-                </div>
+                <Home />
               </Route>
             </Switch>
           </div>

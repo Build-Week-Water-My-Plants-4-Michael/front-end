@@ -1,6 +1,9 @@
 import { useForm, ErrorMessage } from 'react-hook-form'
 import * as yup from 'yup'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { connect } from 'react-redux'
+import { addPlant } from '../actions'
+import { axiosWithAuth } from '../axiosWithAuth/axiosWithAuth'
 
 const schema = yup.object().shape({
     name: yup.string().required(),
@@ -15,14 +18,35 @@ const AddPlant = props => {
         validationSchema: schema
     })
 
+    const [ number, setNumber ] = useState()
+
+    useEffect(() => {
+        axiosWithAuth()
+            .get("https://waterplants.herokuapp.com/plants")
+            .then(res => {
+                console.log(res.data.length)
+                setNumber(res.data.length + 1)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    })
+
     const onSubmit = data => {
-        console.log(data)
+        console.log(data, "Please")
+        props.addPlant({
+            'id': number,
+            'nickname': data.name,
+            'species': data.species,
+            'h2oFrequency': data.h20,
+            'image': data.image
+        })
     }
 
     return (
         <div className="add-plant">
             <div className="card teal darken-3">
-                <h1>Add a plant</h1>
+                <h1>Add a plant #{number}</h1>
                 <form className="add-plant-form" onSubmit={handleSubmit(onSubmit)}>
                     <label>Name</label>
                     <input name="name" ref={register({ required: true })} />
@@ -53,4 +77,4 @@ const AddPlant = props => {
     )
 }
 
-export default AddPlant
+export default connect(null, {addPlant})(AddPlant)

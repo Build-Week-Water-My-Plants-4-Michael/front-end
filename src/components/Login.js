@@ -2,11 +2,9 @@ import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 import { connect } from 'react-redux'
-import { login } from '../actions';
+import { login } from '../actions'
+import { axiosWithAuth } from '../axiosWithAuth/axiosWithAuth'
 import { useHistory } from 'react-router-dom'
-
-
-
 
 const loginSchema = yup.object().shape({
     username: yup.string().required(),
@@ -27,11 +25,15 @@ useEffect(() => {
     const { register, handleSubmit, errors } = useForm({
         validationSchema: loginSchema
     })
+
+
+
     const onSubmit = data => {     
         console.log(data)
         props.login(data)
-        history.push("/plants")
+        history.push("/")
     }
+
     return (
         <div className="login-div">
             <div className="card teal darken-3">
@@ -53,6 +55,10 @@ useEffect(() => {
                 </form>
             </div>
         </div>
+
+                   
+                    
+
     )
 }
 

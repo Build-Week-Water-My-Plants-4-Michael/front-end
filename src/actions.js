@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { BrowserRouter } from 'react-router-dom'
 
 export const CREATE_USER_START = 'CREATE_USER_START'
 export const CREATE_USER_SUCCESS = 'CREATE_USER_SUCCESS'
@@ -29,14 +30,11 @@ export const DELETE_PLANT_SUCCESS = 'DELETE_PLANT_SUCCESS'
 export const DELETE_PLANT_FAILED = 'DELETE_PLANT_FAILED'
  
 export const PLANT_ID ='PLANT_ID'
- 
- 
- 
- 
+
 export const createUser = (creds) => {
     return(dispatch) => {
         dispatch({type: CREATE_USER_START})
- 
+
         return axios.post('https://waterplants.herokuapp.com/register', creds) //insert end point for creating a new user account
         .then((res) => {
             localStorage.setItem('token', res.data.token)
@@ -74,7 +72,6 @@ return(dispatch) => {
         Authorization: localStorage.getItem('token'),
     }    
     console.log(payload)
- 
     axios.post('https://waterplants.herokuapp.com/plants', payload, {headers})
     .then((res) => {
         dispatch ({type: ADD_PLANT_SUCCESS, payload: res.data})
@@ -95,7 +92,7 @@ export const getPlant = (id) => {
             Authorzation: localStorage.getItem('token'),
         }    
         
-        axios.get(`https://waterplants.herokuapp.com/plants/${id}`, {headers})
+        axios.get(`https://waterplants.herokuapp.com/plants/${id}`, {headers}) 
         .then((res) => {
             dispatch({ type: GET_PLANT_SUCCESS, payload: res.data })
         })    
@@ -134,26 +131,28 @@ export const updatePlant = (payload, id) => {
             Authorization: localStorage.getItem('token'),
         }    
         console.log(payload)
-        axios.put(`https://waterplants.herokuapp.com/plants/${id}`, payload, { headers })
+        axios.put(`https://waterplants.herokuapp.com/plants/${id}`, payload, { headers }) 
         .then((res) => {
             dispatch({ type: UPDATE_PLANT_SUCCESS, payload: res.data })
         })    
         .catch((err) => {
-            dispatch({ type: UPDATE_PLANT_FAILED })
-        })    
-    }    
-}    
- 
- 
- 
+            console.log(err)
+            dispatch({ type: UPDATE_PLANT_FAILED, payload: err.response.data })
+        })
+    }
+}
+
+
+
 export const deletePlant = (id) => {
     return(dispatch) => {
         dispatch({ type: DELETE_PLANT_START })
  
         const headers = {
             Authorization : localStorage.getItem('token'),
-        }    
- 
+        }
+
+        console.log("delete")
         axios.delete(`https://waterplants.herokuapp.com/plants/${id}`, { headers })
         .then((res) => {
             console.log(res)

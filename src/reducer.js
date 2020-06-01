@@ -18,6 +18,9 @@ import{
     UPDATE_PLANT_SUCCESS,
     UPDATE_PLANT_FAILED,
     PLANT_ID,
+    DELETE_PLANT_START,
+    DELETE_PLANT_SUCCESS,
+    DELETE_PLANT_FAILED
 } from './actions'
 
 
@@ -181,6 +184,29 @@ const reducer = (state = initialState, action) => {
                 return{
                     ...state,
                     plantID: action.payload
+                }
+            }
+            case DELETE_PLANT_START: {
+                return {
+                    ...state,
+                    isLoading: true,
+                }
+            }
+            case DELETE_PLANT_SUCCESS: {
+                console.log(action.payload)
+                return{
+                    ...state,
+                    isLoading: false,
+                    error: null,
+                    plantChange: action.payload
+                }
+            }
+            case DELETE_PLANT_FAILED: {
+                console.log(action.payload)
+                return {
+                    ...state,
+                    isLoading: false,
+                    error: action.payload.error
                 }
             }
             default:
